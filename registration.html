@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration | Student Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#07040f; --purple:#7c3aed; --purple-light:#a78bfa;
+      --gold:#f59e0b; --gold-light:#fcd34d;
+      --text:#f1f0ff; --muted:rgba(241,240,255,.48);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+    .orb1,.orb2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px);}
+    .orb1{width:520px;height:520px;background:rgba(124,58,237,.22);top:-120px;left:-120px;}
+    .orb2{width:420px;height:420px;background:rgba(245,158,11,.13);bottom:-100px;right:-100px;}
+
+    .navbar{background:rgba(7,4,15,.75)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.08);padding:1rem 2rem;position:sticky;top:0;z-index:100;}
+    .navbar-brand{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--gold-light)!important;}
+    .nav-link{font-weight:500;color:var(--muted)!important;margin:0 4px;transition:color .2s;font-size:.93rem;}
+    .nav-link:hover{color:var(--gold-light)!important;}
+
+    .page-wrap{position:relative;z-index:1;min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:60px 20px;}
+
+    .glass-form {
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:24px; padding:50px 44px;
+      width:100%; max-width:520px;
+      animation:fadeUp .6s ease both;
+      box-shadow:0 32px 80px rgba(0,0,0,.4);
+    }
+    .form-tag{font-size:.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+    .glass-form h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:6px;}
+    .glass-form h2 span{color:var(--gold-light);}
+    .glass-form .sub{color:var(--muted);font-size:.9rem;font-weight:300;margin-bottom:32px;}
+
+    .f-label{font-size:.75rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(241,240,255,.5);margin-bottom:6px;display:block;}
+    .f-input{
+      width:100%; background:rgba(255,255,255,.06)!important;
+      border:1px solid rgba(255,255,255,.1)!important;
+      color:var(--text)!important; border-radius:12px;
+      padding:12px 16px; font-family:'Outfit',sans-serif; font-size:.95rem;
+      outline:none; transition:border-color .2s, box-shadow .2s;
+      appearance:none; -webkit-appearance:none;
+    }
+    .f-input::placeholder{color:rgba(241,240,255,.28);}
+    .f-input:focus{border-color:rgba(124,58,237,.6)!important;box-shadow:0 0 0 3px rgba(124,58,237,.15)!important;}
+    .f-input option{background:#0e0920;color:var(--text);}
+    .fg{margin-bottom:18px;}
+    .err{color:#f87171;font-size:.78rem;margin-top:5px;display:none;}
+    .err.show{display:block;}
+    .inp-err{border-color:rgba(248,113,113,.5)!important;}
+
+    .btn-submit{
+      width:100%; background:linear-gradient(135deg,var(--gold),#d97706);
+      color:#1a0f00; border:none; font-family:'Outfit',sans-serif; font-weight:700;
+      font-size:1rem; padding:14px; border-radius:14px;
+      cursor:pointer; transition:all .3s; margin-top:8px;
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(245,158,11,.35);}
+    .bottom-link{text-align:center;margin-top:20px;color:var(--muted);font-size:.88rem;}
+    .bottom-link a{color:var(--purple-light);text-decoration:none;font-weight:600;}
+    .bottom-link a:hover{color:var(--gold-light);}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <div class="orb1"></div><div class="orb2"></div>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">✦ Student Portal</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="registration.html">Registration</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="glass-form">
+      <span class="form-tag">Create Account</span>
+      <h2>Join <span>Student Portal</span></h2>
+      <p class="sub">Fill in your details to register. All fields are required.</p>
+
+      <form id="regForm" novalidate>
+        <div class="fg"><label class="f-label">Full Name</label>
+          <input type="text" id="name" class="f-input" placeholder="e.g. Ali Hassan"/>
+          <span class="err" id="nameErr">Name is required.</span></div>
+        <div class="fg"><label class="f-label">Email Address</label>
+          <input type="email" id="email" class="f-input" placeholder="student@university.edu"/>
+          <span class="err" id="emailErr">Enter a valid email address.</span></div>
+        <div class="fg"><label class="f-label">Password</label>
+          <input type="password" id="password" class="f-input" placeholder="Min. 6 characters"/>
+          <span class="err" id="passErr">Password is required.</span></div>
+        <div class="fg"><label class="f-label">Confirm Password</label>
+          <input type="password" id="confirmPass" class="f-input" placeholder="Re-enter password"/>
+          <span class="err" id="confirmErr">Passwords do not match.</span></div>
+        <div class="fg"><label class="f-label">Age</label>
+          <input type="text" id="age" class="f-input" placeholder="e.g. 21"/>
+          <span class="err" id="ageErr">Age must be a valid number.</span></div>
+        <div class="fg"><label class="f-label">Gender</label>
+          <select id="gender" class="f-input">
+            <option value="">-- Select Gender --</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <span class="err" id="genderErr">Please select a gender.</span></div>
+        <button type="submit" class="btn-submit">Register &amp; Continue &rarr;</button>
+      </form>
+      <div class="bottom-link">Already registered? <a href="dashboard.html">Go to Dashboard</a></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showE(eid,iid,msg){const e=document.getElementById(eid);e.textContent=msg;e.classList.add('show');document.getElementById(iid).classList.add('inp-err');}
+    function clearAll(){['nameErr','emailErr','passErr','confirmErr','ageErr','genderErr'].forEach(id=>document.getElementById(id).classList.remove('show'));['name','email','password','confirmPass','age','gender'].forEach(id=>document.getElementById(id).classList.remove('inp-err'));}
+    document.getElementById('regForm').addEventListener('submit',function(e){
+      e.preventDefault(); clearAll();
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const password=document.getElementById('password').value;
+      const confirmPass=document.getElementById('confirmPass').value;
+      const age=document.getElementById('age').value.trim();
+      const gender=document.getElementById('gender').value;
+      let valid=true;
+      if(!name){showE('nameErr','name','Name is required.');valid=false;}
+      if(!email){showE('emailErr','email','Email is required.');valid=false;}
+      if(!password){showE('passErr','password','Password is required.');valid=false;}
+      if(!confirmPass){showE('confirmErr','confirmPass','Please confirm your password.');valid=false;}
+      if(!age){showE('ageErr','age','Age is required.');valid=false;}
+      if(!gender){showE('genderErr','gender','Please select a gender.');valid=false;}
+      if(!valid)return;
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showE('emailErr','email','Enter a valid email address.');return;}
+      if(password!==confirmPass){showE('confirmErr','confirmPass','Passwords do not match.');return;}
+      if(isNaN(age)||age===''){showE('ageErr','age','Age must be a numeric value.');return;}
+      sessionStorage.setItem('studentName',name);
+      sessionStorage.setItem('studentEmail',email);
+      window.location.href='dashboard.html';
+    });
+  </script>
+</body>
+</html>
