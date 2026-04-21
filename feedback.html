@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback | Student Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#07040f;--purple:#7c3aed;--purple-light:#a78bfa;--gold:#f59e0b;--gold-light:#fcd34d;--text:#f1f0ff;--muted:rgba(241,240,255,.48);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+    .orb1,.orb2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px);}
+    .orb1{width:520px;height:520px;background:rgba(124,58,237,.22);top:-120px;left:-120px;}
+    .orb2{width:420px;height:420px;background:rgba(245,158,11,.13);bottom:-100px;right:-100px;}
+
+    .navbar{background:rgba(7,4,15,.75)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.08);padding:1rem 2rem;position:sticky;top:0;z-index:100;}
+    .navbar-brand{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--gold-light)!important;}
+    .nav-link{font-weight:500;color:var(--muted)!important;margin:0 4px;transition:color .2s;font-size:.93rem;}
+    .nav-link:hover,.nav-link.active{color:var(--gold-light)!important;}
+
+    .page-wrap{position:relative;z-index:1;min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:60px 20px;}
+
+    .glass-form{
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:24px;padding:50px 44px;
+      width:100%;max-width:520px;
+      animation:fadeUp .6s ease both;
+      box-shadow:0 32px 80px rgba(0,0,0,.4);
+    }
+    .form-tag{font-size:.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+    .glass-form h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:6px;}
+    .glass-form h2 span{color:var(--gold-light);}
+    .glass-form .sub{color:var(--muted);font-size:.9rem;font-weight:300;margin-bottom:32px;}
+
+    .f-label{font-size:.75rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(241,240,255,.5);margin-bottom:6px;display:block;}
+    .f-input{
+      width:100%;background:rgba(255,255,255,.06)!important;
+      border:1px solid rgba(255,255,255,.1)!important;
+      color:var(--text)!important;border-radius:12px;
+      padding:12px 16px;font-family:'Outfit',sans-serif;font-size:.95rem;
+      outline:none;transition:border-color .2s,box-shadow .2s;
+      appearance:none;-webkit-appearance:none;
+    }
+    .f-input::placeholder{color:rgba(241,240,255,.28);}
+    .f-input:focus{border-color:rgba(124,58,237,.6)!important;box-shadow:0 0 0 3px rgba(124,58,237,.15)!important;}
+    textarea.f-input{resize:vertical;min-height:110px;}
+    .f-input option{background:#0e0920;color:var(--text);}
+    .fg{margin-bottom:20px;}
+    .err{color:#f87171;font-size:.78rem;margin-top:5px;display:none;}
+    .err.show{display:block;}
+    .inp-err{border-color:rgba(248,113,113,.5)!important;}
+
+    /* Star rating */
+    .star-row{display:flex;gap:8px;margin-top:4px;}
+    .star-row input{display:none;}
+    .star-row label{font-size:1.6rem;cursor:pointer;transition:transform .15s;color:rgba(255,255,255,.2);line-height:1;}
+    .star-row input:checked ~ label,
+    .star-row label:hover, .star-row label:hover ~ label{color:var(--gold-light);}
+    .star-row{flex-direction:row-reverse;justify-content:flex-end;}
+    .star-row label:hover,.star-row label:hover ~ label,.star-row input:checked ~ label{color:var(--gold-light) !important;}
+
+    .btn-submit{
+      width:100%;background:linear-gradient(135deg,var(--gold),#d97706);
+      color:#1a0f00;border:none;font-family:'Outfit',sans-serif;font-weight:700;
+      font-size:1rem;padding:14px;border-radius:14px;
+      cursor:pointer;transition:all .3s;margin-top:8px;
+    }
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(245,158,11,.35);}
+
+    /* Success */
+    #successMsg{display:none;text-align:center;animation:fadeUp .5s ease both;}
+    #successMsg .s-ico{font-size:3.5rem;margin-bottom:20px;}
+    #successMsg h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold-light);margin-bottom:10px;}
+    #successMsg p{color:var(--muted);line-height:1.7;margin-bottom:28px;font-weight:300;}
+    .btn-back{
+      display:inline-block;text-decoration:none;
+      background:linear-gradient(135deg,var(--purple),#5b21b6);
+      color:#fff;font-family:'Outfit',sans-serif;font-weight:700;
+      padding:12px 30px;border-radius:50px;transition:all .3s;
+    }
+    .btn-back:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.35);color:#fff;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <div class="orb1"></div><div class="orb2"></div>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">✦ Student Portal</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="registration.html">Registration</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+          <li class="nav-item"><a class="nav-link active" href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="glass-form">
+
+      <div id="formSection">
+        <span class="form-tag">Student Voice</span>
+        <h2>Share Your <span>Feedback</span></h2>
+        <p class="sub">Your opinion matters. Help us improve the portal experience.</p>
+
+        <form id="fbForm" novalidate>
+          <div class="fg">
+            <label class="f-label">Your Name</label>
+            <input type="text" id="fbName" class="f-input" placeholder="e.g. Sara Khan"/>
+            <span class="err" id="fbNameErr">Name is required.</span>
+          </div>
+          <div class="fg">
+            <label class="f-label">Comments</label>
+            <textarea id="fbComments" class="f-input" placeholder="Share your experience, suggestions, or any issues..."></textarea>
+            <span class="err" id="fbCommentsErr">Please enter your comments.</span>
+          </div>
+          <div class="fg">
+            <label class="f-label">Rating</label>
+            <select id="fbRating" class="f-input">
+              <option value="">-- Select Rating --</option>
+              <option value="5">⭐⭐⭐⭐⭐ &nbsp;Excellent</option>
+              <option value="4">⭐⭐⭐⭐ &nbsp;Good</option>
+              <option value="3">⭐⭐⭐ &nbsp;Average</option>
+              <option value="2">⭐⭐ &nbsp;Poor</option>
+              <option value="1">⭐ &nbsp;Very Poor</option>
+            </select>
+            <span class="err" id="fbRatingErr">Please select a rating.</span>
+          </div>
+          <button type="submit" class="btn-submit">Submit Feedback 🚀</button>
+        </form>
+      </div>
+
+      <div id="successMsg">
+        <div class="s-ico">🎉</div>
+        <h3>Thank You!</h3>
+        <p>Your feedback has been submitted successfully. We truly appreciate your time and input.</p>
+        <a href="dashboard.html" class="btn-back">← Back to Dashboard</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showE(eid,iid,msg){const e=document.getElementById(eid);e.textContent=msg;e.classList.add('show');document.getElementById(iid).classList.add('inp-err');}
+    function clearAll(){['fbNameErr','fbCommentsErr','fbRatingErr'].forEach(id=>document.getElementById(id).classList.remove('show'));['fbName','fbComments','fbRating'].forEach(id=>document.getElementById(id).classList.remove('inp-err'));}
+    document.getElementById('fbForm').addEventListener('submit',function(e){
+      e.preventDefault(); clearAll();
+      const name=document.getElementById('fbName').value.trim();
+      const comments=document.getElementById('fbComments').value.trim();
+      const rating=document.getElementById('fbRating').value;
+      let valid=true;
+      if(!name){showE('fbNameErr','fbName','Name is required.');valid=false;}
+      if(!comments){showE('fbCommentsErr','fbComments','Please enter your comments.');valid=false;}
+      if(!rating){showE('fbRatingErr','fbRating','Please select a rating.');valid=false;}
+      if(!valid)return;
+      document.getElementById('formSection').style.display='none';
+      document.getElementById('successMsg').style.display='block';
+    });
+  </script>
+</body>
+</html>
