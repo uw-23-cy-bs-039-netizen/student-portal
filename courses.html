@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses | Student Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#07040f;--purple:#7c3aed;--purple-light:#a78bfa;--gold:#f59e0b;--gold-light:#fcd34d;--text:#f1f0ff;--muted:rgba(241,240,255,.48);}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+    .orb1,.orb2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px);}
+    .orb1{width:520px;height:520px;background:rgba(124,58,237,.22);top:-120px;left:-120px;}
+    .orb2{width:420px;height:420px;background:rgba(245,158,11,.13);bottom:-100px;right:-100px;}
+
+    .navbar{background:rgba(7,4,15,.75)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.08);padding:1rem 2rem;position:sticky;top:0;z-index:100;}
+    .navbar-brand{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--gold-light)!important;}
+    .nav-link{font-weight:500;color:var(--muted)!important;margin:0 4px;transition:color .2s;font-size:.93rem;}
+    .nav-link:hover,.nav-link.active{color:var(--gold-light)!important;}
+
+    .wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:60px 24px;}
+
+    .page-tag{font-size:.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block;}
+    h1{font-family:'Playfair Display',serif;font-size:2.4rem;margin-bottom:8px;}
+    h1 span{color:var(--gold-light);}
+    .sub{color:var(--muted);font-size:.92rem;font-weight:300;margin-bottom:44px;}
+
+    .course-card{
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:18px;padding:22px 24px;margin-bottom:14px;
+      display:flex;align-items:center;gap:18px;cursor:pointer;
+      transition:all .28s;animation:fadeUp .5s ease both;
+    }
+    .course-card:nth-child(2){animation-delay:.08s;}
+    .course-card:nth-child(3){animation-delay:.16s;}
+    .course-card:nth-child(4){animation-delay:.24s;}
+    .course-card:hover{background:rgba(124,58,237,.09);border-color:rgba(124,58,237,.35);transform:translateX(6px);}
+    .course-card.selected{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.35);box-shadow:0 0 0 1px rgba(245,158,11,.15);}
+    .course-card input[type="checkbox"]{width:20px;height:20px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;}
+    .c-ico{font-size:1.9rem;flex-shrink:0;}
+    .c-info{flex:1;}
+    .c-info h5{font-weight:700;margin-bottom:4px;font-size:1rem;}
+    .c-info p{color:var(--muted);font-size:.85rem;line-height:1.5;font-weight:300;}
+    .c-badge{
+      background:rgba(124,58,237,.15);color:var(--purple-light);
+      font-size:.7rem;font-weight:700;letter-spacing:.5px;
+      padding:5px 14px;border-radius:50px;flex-shrink:0;
+      border:1px solid rgba(124,58,237,.25);
+    }
+    .course-card.selected .c-badge{background:rgba(245,158,11,.15);color:var(--gold-light);border-color:rgba(245,158,11,.3);}
+
+    .btn-gold{
+      background:linear-gradient(135deg,var(--gold),#d97706);
+      color:#1a0f00;border:none;font-family:'Outfit',sans-serif;font-weight:700;
+      padding:14px 38px;border-radius:50px;font-size:.95rem;
+      cursor:pointer;transition:all .3s;margin-top:10px;display:inline-block;
+    }
+    .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(245,158,11,.35);}
+
+    .back-link{
+      display:inline-flex;align-items:center;gap:8px;
+      color:var(--muted);text-decoration:none;font-weight:600;font-size:.88rem;
+      margin-top:28px;transition:color .2s;
+    }
+    .back-link:hover{color:var(--purple-light);}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <div class="orb1"></div><div class="orb2"></div>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">✦ Student Portal</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="registration.html">Registration</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="courses.html">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <span class="page-tag">Semester Enrollment</span>
+    <h1>Select Your <span>Courses</span></h1>
+    <p class="sub">Choose one or more courses to enroll in this semester.</p>
+
+    <div id="courseList">
+      <label class="course-card">
+        <input type="checkbox" name="course" value="Web Development" onchange="toggleCard(this)"/>
+        <div class="c-ico">🌐</div>
+        <div class="c-info"><h5>Web Development</h5><p>HTML, CSS, JavaScript, Bootstrap, React and modern frameworks.</p></div>
+        <span class="c-badge">Core</span>
+      </label>
+      <label class="course-card">
+        <input type="checkbox" name="course" value="Artificial Intelligence" onchange="toggleCard(this)"/>
+        <div class="c-ico">🤖</div>
+        <div class="c-info"><h5>Artificial Intelligence</h5><p>Machine learning, neural networks, NLP and AI-powered apps.</p></div>
+        <span class="c-badge">Advanced</span>
+      </label>
+      <label class="course-card">
+        <input type="checkbox" name="course" value="Database Systems" onchange="toggleCard(this)"/>
+        <div class="c-ico">🗄️</div>
+        <div class="c-info"><h5>Database Systems</h5><p>SQL, NoSQL, ER modeling, design and query optimization.</p></div>
+        <span class="c-badge">Core</span>
+      </label>
+      <label class="course-card">
+        <input type="checkbox" name="course" value="Mobile App Development" onchange="toggleCard(this)"/>
+        <div class="c-ico">📱</div>
+        <div class="c-info"><h5>Mobile App Development</h5><p>Android, iOS, Flutter and React Native cross-platform dev.</p></div>
+        <span class="c-badge">Elective</span>
+      </label>
+    </div>
+
+    <div><button class="btn-gold" onclick="submitCourses()">✅ &nbsp;Submit Courses</button></div>
+    <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleCard(cb){
+      cb.closest('.course-card').classList.toggle('selected', cb.checked);
+    }
+    function submitCourses(){
+      const checked = document.querySelectorAll('input[name="course"]:checked');
+      if(!checked.length){alert('⚠️ Please select at least one course before submitting.');return;}
+      const list = Array.from(checked).map(c=>'• '+c.value).join('\n');
+      alert('✅ Courses Submitted!\n\nEnrolled in:\n'+list+'\n\nGood luck this semester!');
+    }
+  </script>
+</body>
+</html>
